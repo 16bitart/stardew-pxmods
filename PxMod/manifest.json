@@ -1,0 +1,10 @@
+{
+  "Name": "PxMods",
+  "Author": "16BitArt",
+  "Version": "1.0.0",
+  "Description": "A couple modules to help the game.",
+  "UniqueID": "16BitArt.PxMods",
+  "EntryDll": "PxMod.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}
