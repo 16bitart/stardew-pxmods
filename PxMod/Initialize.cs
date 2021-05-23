@@ -35,7 +35,7 @@ namespace PxMod
                     var farm = Game1.getFarm();
                     _instantGrow.LastDayGrowCheck(Game1.dayOfMonth, farm);
                 }
-                    
+
             };
         }
 
@@ -49,18 +49,18 @@ namespace PxMod
 
             _commands.CreateCommandBinding("PlayerTileLocation", SButton.NumPad9, () =>
             {
-                if (HasAuthority()) 
+                if (HasAuthority())
                 {
-                    var playerTile= Game1.player.GetPlayerTile();
+                    var playerTile = Game1.player.GetPlayerTile();
                     var msg = $"Player Location: {playerTile.X}, {playerTile.Y}";
                     Log(msg);
                 }
             });
 
-            _commands.CreateCommandBinding("SprinklerEverywhere",SButton.OemCloseBrackets, () =>
-            {
-                if (HasAuthority()) _sprinklerMod.Toggle();
-            });
+            _commands.CreateCommandBinding("SprinklerEverywhere", SButton.OemCloseBrackets, () =>
+             {
+                 if (HasAuthority()) _sprinklerMod.Toggle();
+             });
 
             _commands.CreateCommandBinding("InstantGrow", SButton.OemOpenBrackets, () =>
             {
@@ -70,12 +70,15 @@ namespace PxMod
 
         public bool HasAuthority()
         {
-            if (Game1.IsMultiplayer)
+            if (Context.IsWorldReady)
             {
-                return Game1.player.IsMainPlayer && Context.IsWorldReady;
+                if (Game1.IsMultiplayer)
+                {
+                    return Game1.player.IsMainPlayer;
+                }
+                return true;
             }
-
-            return true;
+            return false;
         }
 
         public void Log(string message, LogLevel logLevel = LogLevel.Info)
